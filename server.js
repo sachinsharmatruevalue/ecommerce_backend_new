@@ -13,19 +13,19 @@ dotenv.config({path:'./confing.env'});
 
 const app = require('./app');
 
-mongoose.connect(process.env.DATABASE_LOCAL_STRING,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,})
-.then(con =>{
-    console.log('MongoDB connected');
-})
-
-// mongoose.connect(process.env.DATABASE_LIVE_STRING, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
+// mongoose.connect(process.env.DATABASE_LOCAL_STRING,{
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,})
+// .then(con =>{
+//     console.log('MongoDB connected');
 // })
-//   .then(() => console.log('MongoDB connected'))
-//   .catch((err) => console.error('MongoDB connection error:', err));
+
+mongoose.connect(process.env.DATABASE_LIVE_STRING, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 
 
