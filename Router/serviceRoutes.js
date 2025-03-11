@@ -7,14 +7,14 @@ const router = express.Router();
 
 // Auth routes *****************************************************************
 
-
+router.get('/web',serviceController.getAllWebService);
   router
   .route('/')
   .get(isAuth,serviceController.getAllService)
   .post(isAdmin,multer.singleFileUpload,serviceController.createService)
   router
   .route('/:id')
-  .get(isAuth,serviceController.getService)
+  .get(serviceController.getService)
   .delete(isAdmin,serviceController.deleteService)
   .patch(isAdmin,multer.singleFileUpload,serviceController.updateService)
 

@@ -18,6 +18,16 @@ exports.getAllService = async (req, res) => {
     res.status(500).json({ status: false, error: 'Server Error' });
   }
 };
+exports.getAllWebService = async (req, res) => {
+  try {
+    
+
+    const service = await Service.find({status:"Active"}).sort({ createdAt: -1 }); // Sort by createDate
+    res.status(200).json({ status: true, data: service });
+  } catch (err) {
+    res.status(500).json({ status: false, error: 'Server Error' });
+  }
+};
 
 exports.createService = async (req, res) => {
   try {
