@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Auth routes *****************************************************************
 router.get('/web',packageController.getAllWebPackage);
-
+router.get('/web/popular',packageController.getAllPopularPackage);
   router
   .route('/')
   .get(packageController.getAllPackage)

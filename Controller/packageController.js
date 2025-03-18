@@ -17,6 +17,19 @@ exports.getAllWebPackage = async (req, res) => {
     res.status(500).json({ status: false, error: "Server Error" });
   }
 };
+exports.getAllPopularPackage = async (req, res) => {
+  try {
+    const packages = await Package.find({ status: "Active", popular: true }) // Fixed typo
+      .populate("service")
+      .populate("category")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ status: true, data: packages });
+  } catch (err) {
+    console.error("Error fetching popular packages:", err);
+    res.status(500).json({ status: false, error: "Server Error" });
+  }
+};
 // ✅ Create New Package
 exports.createPackage = async (req, res) => {
   try {
