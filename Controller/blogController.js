@@ -18,6 +18,16 @@ exports.getAllBlog = async (req, res) => {
     res.status(500).json({ status: false, error: 'Server Error' });
   }
 };
+exports.getAllWebBlogs = async (req, res) => {
+  try {
+    
+
+    const blogs = await Blog.find({status:"Active"}).sort({ createdAt: -1 }); // Sort by createDate
+    res.status(200).json({ status: true, data: blogs });
+  } catch (err) {
+    res.status(500).json({ status: false, error: 'Server Error' });
+  }
+};
 
 exports.createBlog = async (req, res) => {
   try {
@@ -89,6 +99,19 @@ exports.updateBlog = async (req, res) => {
 exports.getBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
+
+    if (!blog) {
+      return res.status(404).json({ status: false, error: 'Blog not found' });
+    }
+
+    res.status(200).json({ status: true, data: blog });
+  } catch (err) {
+    res.status(500).json({ status: false, error: err.message });
+  }
+};
+exports.getBlogBySlug = async (req, res) => {
+  try {
+    const blog = await Blog.findOne({ slug: req.params.slug }); // Find by slug instead of ID
 
     if (!blog) {
       return res.status(404).json({ status: false, error: 'Blog not found' });

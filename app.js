@@ -12,6 +12,9 @@ const userRouter = require('./Router/userRoutes');
 const offerBannerRouter = require('./Router/offerBannerRoutes');
 const BlogRouter = require('./Router/blogRoutes');
 const ServiceRouter = require('./Router/serviceRoutes');
+const CategoryRouter = require('./Router/categoryRoutes');
+const TestiRouter = require('./Router/testiRoutes');
+const PackageRouter = require('./Router/packageRoutes');
 
 
  
@@ -41,6 +44,9 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/banner', offerBannerRouter);
 app.use('/api/v1/blog', BlogRouter);
 app.use('/api/v1/service', ServiceRouter);
+app.use('/api/v1/cat', CategoryRouter);
+app.use('/api/v1/testi', TestiRouter);
+app.use('/api/v1/package', PackageRouter);
 
 
 
