@@ -6,6 +6,8 @@ const { isAuth ,isAdmin } = require('../Util/auth');
 const router = express.Router();
 
 // Auth routes *****************************************************************
+router.get('/search',packageController.searchTitleByPackage);
+router.get('/category/:categoryId',packageController.getAllWebPackage);
 router.get('/web',packageController.getAllWebPackage);
 router.get('/web/popular',packageController.getAllPopularPackage);
   router

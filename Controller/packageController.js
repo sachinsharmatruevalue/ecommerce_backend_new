@@ -30,6 +30,49 @@ exports.getAllPopularPackage = async (req, res) => {
     res.status(500).json({ status: false, error: "Server Error" });
   }
 };
+exports.getAllPPackageBYCategory = async (req, res) => {
+  try {
+    const { categoryId } = req.params; // Category ID ko request parameters se le rahe hain
+
+    if (!categoryId) {
+      return res.status(400).json({ status: false, error: "Category ID is required" });
+    }
+
+    const packages = await Package.find({ status: "Active", category: categoryId }) 
+      .populate("service")
+      .populate("category")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ status: true, data: packages });
+  } catch (err) {
+    console.error("Error fetching packages by category:", err);
+    res.status(500).json({ status: false, error: "Server Error" });
+  }
+};
+
+exports.searchTitleByPackage = async (req, res) => {
+  try {
+    const { title } = req.query; // Query se title le rahe hain
+
+    if (!title) {
+      return res.status(400).json({ status: false, error: "Title is required for search" });
+    }
+
+    const packages = await Package.find({
+      status: "Active",
+      title: { $regex: title, $options: "i" }, // Case-insensitive search
+    })
+      .populate("service")
+      .populate("category")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ status: true, data: packages });
+  } catch (err) {
+    console.error("Error searching package by title:", err);
+    res.status(500).json({ status: false, error: "Server Error" });
+  }
+};
+
 // ✅ Create New Package
 exports.createPackage = async (req, res) => {
   try {
