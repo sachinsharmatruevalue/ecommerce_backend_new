@@ -30,7 +30,7 @@ exports.getAllPopularPackage = async (req, res) => {
     res.status(500).json({ status: false, error: "Server Error" });
   }
 };
-exports.getAllPPackageBYCategory = async (req, res) => {
+exports.getAllPackageBYCategory = async (req, res) => {
   try {
     const { categoryId } = req.params; // Category ID ko request parameters se le rahe hain
 

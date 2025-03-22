@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Auth routes *****************************************************************
 router.get('/search',packageController.searchTitleByPackage);
-router.get('/category/:categoryId',packageController.getAllWebPackage);
+router.get('/category/:categoryId',packageController.getAllPackageBYCategory);
 router.get('/web',packageController.getAllWebPackage);
 router.get('/web/popular',packageController.getAllPopularPackage);
   router
