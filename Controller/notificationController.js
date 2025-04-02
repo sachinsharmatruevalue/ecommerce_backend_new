@@ -11,7 +11,7 @@ exports.getAllNotification = async (req, res) => {
     let filter = {};
 
     if (req.user.userType !== 'Admin') {
-      filter.status = "show"; 
+      filter.status = "Active"; 
      
     }
 
