@@ -1,4 +1,7 @@
 const Package = require("../model/Package");
+const Category = require("../model/Category");
+const Notification = require("../model/Notification");
+const Banner = require("../model/OfferBanner");
 
 // ✅ Get All Packages (Sorted by Latest)
 exports.getAllPackage = async (req, res) => {
@@ -129,5 +132,29 @@ exports.deletePackage = async (req, res) => {
     res.status(200).json({ status: true, message: "Package deleted successfully" });
   } catch (err) {
     res.status(500).json({ status: false, error: "Server Error" });
+  }
+};
+exports.homePackage = async (req, res) => {
+  try {
+    const packageData = await Package.find({ popular: true })
+      .populate("service")
+      .populate("category")
+      .sort({ createdAt: -1 });
+
+    const categoryData = await Category.find({ status: "Active" }).sort({ createdAt: -1 });
+    const bannerData = await Banner.find({ status: "Active" }).sort({ createdAt: -1 });
+    const activeNotificationCount = await Notification.countDocuments({ status: "Active" });
+
+    res.status(200).json({
+      status: true,
+      data: {
+        package: packageData,
+        category: categoryData,
+        banner: bannerData,
+        notificationCount: activeNotificationCount, // Notification count added here
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ status: false, message: error.message });
   }
 };
