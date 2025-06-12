@@ -6,7 +6,7 @@ const multer = require('../Util/Multer');
 const router = express.Router();
 
 // Auth routes *****************************************************************
-
+router.get('/web/end',bannerController.getWebAllBannersByEndDate)
 router.get('/web/end',bannerController.getWebAllBannersByEndDate)
 router.get('/end',isAuth,bannerController.getAllBannersByEndDate)
   router
