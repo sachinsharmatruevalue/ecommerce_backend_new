@@ -4,6 +4,8 @@ const userController = require('../Controller/userController');
 const { isAuth, isAdmin } = require('../Util/auth');
 const multer = require('../Util/Multer')
 
+router.get('/report/userReport',isAuth,userController.getAllReportByUser);
+
 router
     .route('/report')
     .post(multer.uploadHandler,userController.createUserReport)
